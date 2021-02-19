@@ -5,17 +5,17 @@ import { Link } from "react-router-dom";
 import { fetchDetail, fetchSimilarMovies } from "../store/action";
 
 function Card(props) {
+  const dispatch = useDispatch();
+  const [imgUrl, setImgUrl] = React.useState("");
   const imgPrefix = "https://image.tmdb.org/t/p/w500";
   const year = props.movie.release_date
     ? props.movie.release_date.split("-")[0]
     : "";
-  const dispatch = useDispatch();
+
   const handleClick = (id) => {
     dispatch(fetchDetail(id));
     dispatch(fetchSimilarMovies(id));
   };
-  const [imgUrl, setImgUrl] = React.useState("");
-
   const checkUrl = () => {
     axios({
       url: imgPrefix + props.movie.poster_path,
@@ -27,10 +27,6 @@ function Card(props) {
         setImgUrl("https://bulma.io/images/placeholders/320x480.png");
       });
   };
-
-  React.useEffect(() => {
-    checkUrl();
-  }, []);
   const detail = (
     <div className="card-content">
       <div className="media">
@@ -41,6 +37,10 @@ function Card(props) {
       </div>
     </div>
   );
+
+  React.useEffect(() => {
+    checkUrl();
+  }, []);
   return (
     <div className="column is-one-fifth">
       <div className="card">

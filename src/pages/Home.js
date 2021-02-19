@@ -8,7 +8,6 @@ function Home() {
   const movies = useSelector((state) => state.movies);
   const [nextPage, setNextPage] = React.useState(2);
   const isNoData = useSelector((state) => state.isNoData);
-  const [message, setMessage] = React.useState("");
 
   window.onscroll = () => {
     const windowHeight =
@@ -36,43 +35,14 @@ function Home() {
       }
     }
   };
-  // const handleScroll = () => {
-  //   const windowHeight =
-  //     "innerHeight" in window
-  //       ? window.innerHeight
-  //       : document.documentElement.offsetHeight;
-  //   const body = document.body;
-  //   const html = document.documentElement;
-  //   const docHeight = Math.max(
-  //     body.scrollHeight,
-  //     body.offsetHeight,
-  //     html.clientHeight,
-  //     html.scrollHeight,
-  //     html.offsetHeight
-  //   );
-  //   const windowBottom = windowHeight + window.pageYOffset;
-  //   if (windowBottom >= docHeight) {
-  //     console.log("bottom");
-  //     if (!isNoData) {
-  //       //dispatch(fetchMovies(nextPage));
-  //       console.log(nextPage + 1, "<<harunsya");
-  //       let temp = nextPage + 1;
-  //       setNextPage(temp);
-  //       console.log(nextPage, "<<< nextPage inside");
-  //     }
-  //   }
-  // };
-  console.log(nextPage, "<<< nextPage");
 
   React.useEffect(() => {
     dispatch(fetchMovies());
-    //window.addEventListener("scroll", handleScroll);
     return function cleanUp() {
       dispatch({
         type: "SET_MOVIES",
         payload: [],
       });
-      //window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 

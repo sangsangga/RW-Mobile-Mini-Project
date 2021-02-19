@@ -1,5 +1,4 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchDetail, fetchSimilarMovies } from "../store/action";
 import "../Detail.css";
@@ -9,7 +8,6 @@ import axios from "axios";
 function Detail() {
   const imgPrefix = "https://image.tmdb.org/t/p/w500";
   const { id } = useParams();
-  const dispatch = useDispatch();
   const movie = useSelector((state) => state.detailMovie);
   const relatedMovies = useSelector((state) => state.relatedMovies);
   const year = movie.release_date ? movie.release_date.split("-")[0] : "";
