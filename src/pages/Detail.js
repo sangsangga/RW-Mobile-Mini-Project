@@ -4,6 +4,7 @@ import { fetchDetail, fetchSimilarMovies } from "../store/action";
 import "../Detail.css";
 import Card from "../components/Card";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 function Detail() {
   const imgPrefix = "https://image.tmdb.org/t/p/w500";
