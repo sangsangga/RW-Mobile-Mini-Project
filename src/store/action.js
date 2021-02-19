@@ -1,4 +1,3 @@
-import axios from "axios";
 import { axiosInstance } from "../helpers/axiosInstance";
 const API_KEY = process.env.REACT_APP_API_KEY_TMDB;
 
@@ -19,13 +18,9 @@ export function fetchMovies(page = 1) {
           type: "ADD_MOVIES",
           payload: response.data.results,
         });
-        // dispatch({
-        //   type: "SET_IS_NO_DATA",
-        //   payload: false,
-        // });
       }
     } catch (error) {
-      console.log(error, "<<< err");
+      console.log(error);
     }
   };
 }
@@ -37,7 +32,6 @@ export function fetchDetail(id) {
         url: `/movie/${id}?api_key=${API_KEY}`,
         method: "GET",
       });
-      console.log(response.data, "<< res detail");
       dispatch({
         type: "SET_DETAIL_MOVIES",
         payload: response.data,
@@ -55,13 +49,13 @@ export function fetchSimilarMovies(id) {
         url: `/movie/${id}/similar?api_key=${API_KEY}`,
         method: "GET",
       });
-      console.log(response.data, "<< res similar");
+      console.log(response.data);
       dispatch({
         type: "SET_RELATED_MOVIES",
         payload: response.data.results,
       });
     } catch (error) {
-      console.log(error, "<<err");
+      console.log(error);
     }
   };
 }

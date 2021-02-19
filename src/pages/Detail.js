@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { fetchDetail, fetchSimilarMovies } from "../store/action";
 import "../Detail.css";
 import Card from "../components/Card";
+import axios from "axios";
 
 function Detail() {
   const imgPrefix = "https://image.tmdb.org/t/p/w500";
@@ -14,8 +15,6 @@ function Detail() {
   const year = movie.release_date ? movie.release_date.split("-")[0] : "";
 
   React.useEffect(() => {
-    // dispatch(fetchDetail(id));
-    // dispatch(fetchSimilarMovies(id));
     window.scrollTo(0, 0);
   }, [movie]);
   return (
@@ -36,7 +35,7 @@ function Detail() {
         <h1 className="title has-text-centered">Related Movies</h1>
         <div className="columns is-multiline is-desktop">
           {relatedMovies.map((movie) => {
-            return <Card key={movie.id} movie={movie} />;
+            return <Card key={movie.id} movie={movie} isSimilar={true} />;
           })}
         </div>
       </section>

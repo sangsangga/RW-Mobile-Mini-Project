@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -13,6 +14,33 @@ function Card(props) {
     dispatch(fetchDetail(id));
     dispatch(fetchSimilarMovies(id));
   };
+  const [imgUrl, setImgUrl] = React.useState("");
+
+  const checkUrl = () => {
+    axios({
+      url: imgPrefix + props.movie.poster_path,
+    })
+      .then((res) => {
+        setImgUrl(imgPrefix + props.movie.poster_path);
+      })
+      .catch((err) => {
+        setImgUrl("https://bulma.io/images/placeholders/320x480.png");
+      });
+  };
+
+  React.useEffect(() => {
+    checkUrl();
+  }, []);
+  const detail = (
+    <div className="card-content">
+      <div className="media">
+        <div className="media-content">
+          <p className="title is-5">{props.movie.original_title}</p>
+          <p className="subtitle is-6">{year}</p>
+        </div>
+      </div>
+    </div>
+  );
   return (
     <div className="column is-one-fifth">
       <div className="card">
@@ -22,29 +50,11 @@ function Card(props) {
               to={`/detail/${props.movie.id}`}
               onClick={() => handleClick(props.movie.id)}
             >
-              <img
-                src={imgPrefix + props.movie.poster_path}
-                alt="Placeholder image"
-              />
+              <img src={imgUrl} alt="Placeholder image" />
             </Link>
           </figure>
         </div>
-        <div className="card-content">
-          <div className="media">
-            <div className="media-content">
-              <p className="title is-5">{props.movie.original_title}</p>
-              <p className="subtitle is-6">{year}</p>
-            </div>
-          </div>
-
-          {/* <div class="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            nec iaculis mauris. <a>@bulmaio</a>.<a href="#">#css</a>{" "}
-            <a href="#">#responsive</a>
-            <br />
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-          </div> */}
-        </div>
+        {props.isSimilar ? "" : detail}
       </div>
     </div>
   );

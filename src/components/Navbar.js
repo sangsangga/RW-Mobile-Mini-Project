@@ -10,12 +10,21 @@ function Navbar() {
       payload: {},
     });
   };
+  const style = {
+    backgroundColor: "black",
+    padding: "10px",
+  };
   return (
     <React.Fragment>
-      <nav className="navbar" role="navigation" aria-label="main navigation">
+      <nav
+        style={style}
+        className="navbar"
+        role="navigation"
+        aria-label="main navigation"
+      >
         <div className="navbar-brand">
           <Link className="navbar-item" href="https://bulma.io">
-            <h1>Movies</h1>
+            <h1 className="title has-text-white">MoviesBox</h1>
           </Link>
 
           <Link
@@ -33,20 +42,13 @@ function Navbar() {
 
         <div id="navbarBasicExample" className="navbar-menu">
           <div className="navbar-start">
-            <Link to="/" className="navbar-item" onClick={cleanDetail}>
+            <Link
+              to="/"
+              className="navbar-item has-text-white"
+              onClick={cleanDetail}
+            >
               Home
             </Link>
-          </div>
-
-          <div className="navbar-end">
-            <div className="navbar-item">
-              <div className="buttons">
-                <a className="button is-primary">
-                  <strong>Sign up</strong>
-                </a>
-                <a className="button is-light">Log in</a>
-              </div>
-            </div>
           </div>
         </div>
       </nav>
